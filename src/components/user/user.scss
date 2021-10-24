@@ -1,0 +1,52 @@
+.card {
+  display: flex;
+  position: relative;
+  margin: 20px 0;
+  background-color: #f5f5f5 !important;
+  color: #2d2d2d !important;
+
+  .actionButton {
+    display: inline;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+}
+
+.info {
+  .infoField {
+    .infoTitle {
+      font-weight: 700;
+    }
+
+    .infoDetail {
+      margin-left: 5px;
+    }
+  }
+}
+
+.actionButton {
+  max-width: content;
+
+  .edit {
+    &:hover {
+      color: blue;
+    }
+  }
+
+  .delete {
+    &:hover {
+      color: red;
+    }
+  }
+}
+
+$mediaMinWidth: 480px;
+
+@media (min-width: $mediaMinWidth) {
+  .card {
+    .actionButton {
+      display: flex;
+    }
+  }
+}
