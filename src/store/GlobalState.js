@@ -9,6 +9,10 @@ const initState = {
     type: "",
     message: "",
   },
+  pagination: {
+    currentPage: 1,
+    totalPage: 1,
+  },
 };
 
 export const GlobalContext = createContext(initState);
@@ -20,21 +24,25 @@ export const GlobalContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${URL}/api/users`);
+        const res = await axios.get(
+          `${URL}/api/users?page=${state.pagination.currentPage}`
+        );
 
-        dispatch({
-          type: ACTIONS.GET_USERS,
-          payload: { users: res.data.data },
-        });
+        // set total page
+        setTotalPage(res.data.total_pages);
+        // get users
+        getUsers();
       } catch (err) {
-        setAlertMessage("error", err.response.data.error);
+        setAlertMessage("error", "Unable to fetch data!");
       }
     };
 
     fetchData();
-  }, []);
+  }, [state.pagination]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Actions
+
+  // User CRUD (operations)
   async function getUsers() {
     try {
       const res = await axios.get(`${URL}/api/users`);
@@ -103,6 +111,22 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }
 
+  // pagination
+  function setTotalPage(count) {
+    dispatch({
+      type: ACTIONS.SET_TOTAL_PAGE,
+      payload: { count },
+    });
+  }
+
+  function setCurrentPage(count) {
+    dispatch({
+      type: ACTIONS.SET_CURRENT_PAGE,
+      payload: { count },
+    });
+  }
+
+  // alert
   function setAlertMessage(type, message) {
     dispatch({
       type: ACTIONS.SET_ALERT,
@@ -115,11 +139,15 @@ export const GlobalContextProvider = ({ children }) => {
       value={{
         users: state.users,
         alert: state.alert,
+        pagination: state.pagination,
+
         createUser,
         getUsers,
         updateUser,
         deleteUser,
+
         setAlertMessage,
+        setCurrentPage,
       }}
     >
       {children}

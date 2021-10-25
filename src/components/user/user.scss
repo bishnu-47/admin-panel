@@ -5,11 +5,22 @@
   background-color: #f5f5f5 !important;
   color: #2d2d2d !important;
 
-  .actionButton {
-    display: inline;
+  .actionButtons {
     position: absolute;
     top: 15px;
     right: 15px;
+
+    .edit {
+      &:hover {
+        color: blue;
+      }
+    }
+
+    .delete {
+      &:hover {
+        color: red;
+      }
+    }
   }
 }
 
@@ -25,28 +36,13 @@
   }
 }
 
-.actionButton {
-  max-width: content;
-
-  .edit {
-    &:hover {
-      color: blue;
-    }
-  }
-
-  .delete {
-    &:hover {
-      color: red;
-    }
-  }
-}
-
-$mediaMinWidth: 480px;
-
-@media (min-width: $mediaMinWidth) {
+@media (max-width: 480px) {
   .card {
-    .actionButton {
-      display: flex;
+    .actionButtons {
+      max-height: 50px;
+      bottom: 10px;
+      top: auto;
+      right: 10px;
     }
   }
 }

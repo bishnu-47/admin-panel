@@ -12,7 +12,7 @@ const UserForm = ({ type, data, closeForm }) => {
   const [imageUrl, setImageUrl] = useState(data ? data.avatar : "");
 
   // other vars
-  const { updateUser, createUser } = useContext(GlobalContext);
+  const { updateUser, createUser, setAlertMessage } = useContext(GlobalContext);
 
   function handleOnCancel() {
     closeForm();
@@ -25,13 +25,34 @@ const UserForm = ({ type, data, closeForm }) => {
       email,
       avatar: imageUrl,
     };
+
+    // if field is empty
+    if (
+      newData.first_name === "" ||
+      newData.last_name === "" ||
+      newData.email === "" ||
+      newData.avatar === ""
+    ) {
+      return setAlertMessage("warning", "Please enter all fields!");
+    }
+    // if email is not valid
+    if (!validateEmail(newData.email)) {
+      return setAlertMessage("warning", "Please enter a valid Email!");
+    }
+
     if (type === "update") {
       updateUser(newData, data.id);
     } else if (type === "create") {
-      createUser(newData, Math.floor(Math.random() * 100));
+      createUser(newData, Math.floor(Math.random() * 1000));
     }
 
     closeForm();
+  }
+
+  function validateEmail(email) {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
   }
 
   return (
@@ -54,7 +75,7 @@ const UserForm = ({ type, data, closeForm }) => {
         />
         <TextField
           id="filled-basic"
-          label="email"
+          label="Email"
           variant="filled"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -68,10 +89,20 @@ const UserForm = ({ type, data, closeForm }) => {
         />
 
         <div>
-          <Button variant="outlined" color="error" onClick={handleOnCancel}>
+          <Button
+            variant="outlined"
+            color="error"
+            title="Edit"
+            onClick={handleOnCancel}
+          >
             Cancel
           </Button>
-          <Button variant="outlined" color="primary" onClick={handleOnSubmit}>
+          <Button
+            variant="outlined"
+            color="primary"
+            title="Delete"
+            onClick={handleOnSubmit}
+          >
             {type}
           </Button>
         </div>

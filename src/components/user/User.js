@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Card, CardContent, Box, IconButton, CardMedia } from "@mui/material";
+import { Card, CardContent, IconButton, CardMedia } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -46,7 +46,7 @@ const User = ({ data }) => {
         </div>
       </CardContent>
 
-      <Box className="actionButton">
+      <div className="actionButtons">
         <IconButton className="edit" aria-label="edit" onClick={handleOnEdit}>
           <EditIcon />
         </IconButton>
@@ -57,7 +57,7 @@ const User = ({ data }) => {
         >
           <DeleteIcon />
         </IconButton>
-      </Box>
+      </div>
     </Card>
   );
 };

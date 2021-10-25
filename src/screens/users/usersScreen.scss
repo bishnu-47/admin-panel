@@ -19,3 +19,9 @@
     color: #4bb543;
   }
 }
+
+.paginationContainer {
+  display: flex !important;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
