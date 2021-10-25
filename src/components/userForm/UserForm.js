@@ -6,13 +6,13 @@ import "./userForm.scss";
 
 const UserForm = ({ type, data, closeForm }) => {
   // state
-  const [firstName, setFirstName] = useState(data.first_name);
-  const [lastName, setLastName] = useState(data.last_name);
-  const [email, setEmail] = useState(data.email);
-  const [imageUrl, setImageUrl] = useState(data.avatar);
+  const [firstName, setFirstName] = useState(data ? data.first_name : "");
+  const [lastName, setLastName] = useState(data ? data.last_name : "");
+  const [email, setEmail] = useState(data ? data.email : "");
+  const [imageUrl, setImageUrl] = useState(data ? data.avatar : "");
 
   // other vars
-  const { updateUser } = useContext(GlobalContext);
+  const { updateUser, createUser } = useContext(GlobalContext);
 
   function handleOnCancel() {
     closeForm();
@@ -27,6 +27,8 @@ const UserForm = ({ type, data, closeForm }) => {
     };
     if (type === "update") {
       updateUser(newData, data.id);
+    } else if (type === "create") {
+      createUser(newData, Math.floor(Math.random() * 100));
     }
 
     closeForm();

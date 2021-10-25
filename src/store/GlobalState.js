@@ -44,7 +44,7 @@ export const GlobalContextProvider = ({ children }) => {
         payload: { users: res.data.data },
       });
     } catch (err) {
-      setAlertMessage("error", err.response.data.error);
+      setAlertMessage("error", "Fetching data failed!");
     }
   }
 
@@ -54,7 +54,7 @@ export const GlobalContextProvider = ({ children }) => {
         "Content-type": "application/json",
       };
 
-      const res = await axios.put(`${URL}/api/${id}`, newData, {
+      const res = await axios.put(`${URL}/api/users/${id}`, newData, {
         headers,
       });
       dispatch({
@@ -63,8 +63,29 @@ export const GlobalContextProvider = ({ children }) => {
       });
       setAlertMessage("success", "User Data updated.");
     } catch (err) {
-      console.log(err);
-      setAlertMessage("error", err.response.data.error);
+      setAlertMessage("error", "Updating user failed!");
+    }
+  }
+
+  async function createUser(newData, id) {
+    try {
+      const headers = {
+        "Content-type": "application/json",
+      };
+
+      const res = await axios.post(`${URL}/api/users`, newData, {
+        headers,
+      });
+      console.log(res);
+
+      dispatch({
+        type: ACTIONS.CREATE_USER,
+        payload: { id: id, data: res.data },
+      });
+      setAlertMessage("success", "New User Created.");
+    } catch (err) {
+      console.log(err.response);
+      setAlertMessage("error", "User creation Failed!");
     }
   }
 
@@ -78,7 +99,7 @@ export const GlobalContextProvider = ({ children }) => {
       });
       setAlertMessage("success", "User Deleted...");
     } catch (err) {
-      setAlertMessage("error", err.response.data.error);
+      setAlertMessage("error", "User deletion Failed!");
     }
   }
 
@@ -94,6 +115,7 @@ export const GlobalContextProvider = ({ children }) => {
       value={{
         users: state.users,
         alert: state.alert,
+        createUser,
         getUsers,
         updateUser,
         deleteUser,

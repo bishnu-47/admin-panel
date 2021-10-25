@@ -1,0 +1,21 @@
+.usersScreen {
+  background-color: #e4dbd4;
+  height: 100%;
+}
+
+.headerContainer {
+  display: flex !important;
+  padding: 0 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header {
+  padding-top: 10px;
+}
+
+.addUser {
+  &:hover {
+    color: #4bb543;
+  }
+}

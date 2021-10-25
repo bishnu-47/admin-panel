@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import UsersScreen from "./screens/UsersScreen";
+import UsersScreen from "./screens/users/UsersScreen";
 import AlertMessage from "./components/alertMessage/AlertMessage";
 import { GlobalContext } from "./store/GlobalState";
 import "./app.scss";

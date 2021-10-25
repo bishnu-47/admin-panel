@@ -26,6 +26,12 @@ export const AppReducer = (state, action) => {
         users: newUsersList,
       };
     }
+    case ACTIONS.CREATE_USER: {
+      return {
+        ...state,
+        users: [...state.users, action.payload.data],
+      };
+    }
     case ACTIONS.DELETE_USER:
       return {
         ...state,
