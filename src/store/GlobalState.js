@@ -30,22 +30,27 @@ export const GlobalContextProvider = ({ children }) => {
 
         // set total page
         setTotalPage(res.data.total_pages);
-        // get users
-        getUsers();
+        // set users
+        dispatch({
+          type: ACTIONS.GET_USERS,
+          payload: { users: res.data.data },
+        });
       } catch (err) {
         setAlertMessage("error", "Unable to fetch data!");
       }
     };
 
     fetchData();
-  }, [state.pagination]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [state.pagination.currentPage]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Actions
 
   // User CRUD (operations)
   async function getUsers() {
     try {
-      const res = await axios.get(`${URL}/api/users`);
+      const res = await axios.get(
+        `${URL}/api/users?page=${state.pagination.currentPage}`
+      );
 
       dispatch({
         type: ACTIONS.GET_USERS,

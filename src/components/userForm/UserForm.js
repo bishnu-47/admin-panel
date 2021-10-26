@@ -63,6 +63,7 @@ const UserForm = ({ type, data, closeForm }) => {
           label="First Name"
           variant="filled"
           value={firstName}
+          tabIndex={1}
           onChange={(e) => setFirstName(e.target.value)}
         />
 
@@ -71,6 +72,7 @@ const UserForm = ({ type, data, closeForm }) => {
           label="Last Name"
           variant="filled"
           value={lastName}
+          tabIndex={2}
           onChange={(e) => setLastName(e.target.value)}
         />
         <TextField
@@ -78,6 +80,7 @@ const UserForm = ({ type, data, closeForm }) => {
           label="Email"
           variant="filled"
           value={email}
+          tabIndex={3}
           onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
@@ -85,6 +88,7 @@ const UserForm = ({ type, data, closeForm }) => {
           label="Profile Image"
           variant="filled"
           value={imageUrl}
+          tabIndex={4}
           onChange={(e) => setImageUrl(e.target.value)}
         />
 
@@ -93,6 +97,7 @@ const UserForm = ({ type, data, closeForm }) => {
             variant="outlined"
             color="error"
             title="Edit"
+            tabIndex={5}
             onClick={handleOnCancel}
           >
             Cancel
@@ -101,6 +106,7 @@ const UserForm = ({ type, data, closeForm }) => {
             variant="outlined"
             color="primary"
             title="Delete"
+            tabIndex={6}
             onClick={handleOnSubmit}
           >
             {type}

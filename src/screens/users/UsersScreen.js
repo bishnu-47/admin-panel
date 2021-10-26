@@ -24,37 +24,40 @@ const UsersScreen = () => {
   return (
     <div className="usersScreen">
       <Navbar />
-      <Container maxWidth="sm" className="headerContainer">
-        <Typography variant="h3" component="div" className="header">
-          Users
-        </Typography>
 
-        <IconButton
-          className="addUser"
-          aria-label="add-user"
-          title="Add User"
-          disabled={showCreateForm}
-          onClick={handleOnClick}
-        >
-          <PersonAddIcon />
-        </IconButton>
-      </Container>
-      {showCreateForm && (
-        <Container maxWidth="sm" className="formContainer">
-          <UserForm type="create" closeForm={handleOnClick} />
+      <div className="userScreenContent">
+        <Container maxWidth="sm" className="headerContainer">
+          <Typography variant="h3" component="div" className="header">
+            Users
+          </Typography>
+
+          <IconButton
+            className="addUser"
+            aria-label="add-user"
+            title="Add User"
+            disabled={showCreateForm}
+            onClick={handleOnClick}
+          >
+            <PersonAddIcon />
+          </IconButton>
         </Container>
-      )}
-      <UsersList />
+        {showCreateForm && (
+          <Container maxWidth="sm" className="formContainer">
+            <UserForm type="create" closeForm={handleOnClick} />
+          </Container>
+        )}
+        <UsersList />
 
-      <Container maxWidth="sm" className="paginationContainer">
-        <Pagination
-          count={pagination.totalPage}
-          page={pagination.currentPage}
-          variant="outlined"
-          shape="rounded"
-          onChange={handleOnPageChange}
-        />{" "}
-      </Container>
+        <Container maxWidth="sm" className="paginationContainer">
+          <Pagination
+            count={pagination.totalPage}
+            page={pagination.currentPage}
+            variant="outlined"
+            shape="rounded"
+            onChange={handleOnPageChange}
+          />{" "}
+        </Container>
+      </div>
 
       <Footer />
     </div>
