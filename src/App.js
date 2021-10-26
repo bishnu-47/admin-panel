@@ -4,7 +4,7 @@ import UsersScreen from "./screens/users/UsersScreen";
 import AboutScreen from "./screens/about/AboutScreen.js";
 import AlertMessage from "./components/alertMessage/AlertMessage";
 import { GlobalContext } from "./store/GlobalState";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import "./app.scss";
 
 function App() {

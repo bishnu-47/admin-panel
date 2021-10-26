@@ -7,7 +7,7 @@
 
   .actionButtons {
     position: absolute;
-    top: 15px;
+    top: 5px;
     right: 15px;
 
     .edit {
@@ -38,10 +38,22 @@
 
 @media (max-width: 480px) {
   .card {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+
+    .cardImage {
+      margin: 0 auto;
+      border-radius: 50%;
+    }
+
+    .info {
+      text-align: center;
+    }
+
     .actionButtons {
       max-height: 50px;
-      bottom: 10px;
-      top: auto;
+      top: 5px;
       right: 10px;
     }
   }

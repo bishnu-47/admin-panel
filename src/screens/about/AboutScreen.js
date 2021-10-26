@@ -1,5 +1,4 @@
 import { Typography, Container } from "@mui/material";
-import { Link } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer.js";
 import "./aboutScreen.scss";
@@ -14,7 +13,11 @@ const AboutScreen = () => {
         </Typography>
         <Typography variant="h5" align="center" gutterBottom>
           <span>This project was created as an assignment for </span>
-          <a href="https://botbaba.io/" target="_blank">
+          <a
+            href="https://botbaba.io/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             botbaba.io
           </a>
           .
